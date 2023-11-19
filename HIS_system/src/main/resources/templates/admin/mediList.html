@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+</script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<div layout:fragment="content">
+<h1 style="text-align:center;">의료진 목록</h1>
+<form action="/admin/mediInsert" method="get" th:object="${mediInsertCommand}">
+	   <h4>의사</h4>
+	   <table class="table">
+	   	<tr>
+				<th>DR_SEQ</th>
+				<th>이름</th>
+				<th>부서</th>
+				<th>핸드폰</th>
+	   	<tr>
+		
+		<th:block th:unless="${#lists.isEmpty(list)}">
+			<tr th:each="dto:${list}" th:if="${dto.job=='dr'}">
+				<td th:text="${dto.medi_seq}"></td>
+				<td>
+					<a th:href="@{/admin/updateMedi(medi_seq=${dto.medi_seq})}"
+					   th:text="${dto.name}"></a>
+				</td>
+				<td th:text="${dto.dept}"></td>
+				<td th:text="${dto.phone}"></td>
+			</tr>
+		</th:block>
+   </table>
+	   <h4>간호사</h4>
+	   <table class="table">
+	   	<tr>
+				<th>RN_SEQ</th>
+				<th>이름</th>
+				<th>부서</th>
+				<th>핸드폰</th>
+	   	<tr>
+		
+		<th:block th:unless="${#lists.isEmpty(list)}">
+			<tr th:each="dto:${list}" th:if="${dto.job=='rn'}">
+				<td th:text="${dto.medi_seq}"></td>
+				<td>
+					<a th:href="@{/admin/updateMedi(medi_seq=${dto.medi_seq})}"
+					   th:text="${dto.name}"></a>
+				</td>
+				<td th:text="${dto.dept}"></td>
+				<td th:text="${dto.phone}"></td>
+			</tr>
+		</th:block>
+	   </table>
+   <button type="submit" class="btn">의료진 등록</button>
+</form>
+</div>
+</body>
+</html>
+
+
+

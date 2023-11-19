@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.his.mapper.AdminMapper">
+	<select id="adminLogin" parameterType="String" resultType="adminDto">
+		SELECT ID, PASSWORD
+		FROM ADMIN
+		WHERE ID = #{id}
+	</select>
+	<select id="getMediList" resultType="mediDto">
+		SELECT MEDI_SEQ, JOB, NAME, DEPT, PHONE
+		FROM MEDI
+		ORDER BY MEDI_SEQ ASC
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
