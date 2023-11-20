@@ -12,6 +12,20 @@
 		FROM MEDI
 		ORDER BY MEDI_SEQ ASC
 	</select>
+	<insert id="addMedi" parameterType="mediDto">
+		INSERT INTO MEDI
+		VALUES (NULL,#{job},#{name},#{dept},#{phone})
+	</insert>
+	<select id="getMedi" parameterType="Integer" resultType="mediDto">
+		SELECT *
+		FROM MEDI
+		WHERE MEDI_SEQ=#{medi_seq}
+	</select>
+	<update id="mediUpdate" parameterType="mediDto">
+		UPDATE MEDI
+		SET DEPT=#{dept}, PHONE=#{phone}
+		WHERE MEDI_SEQ=#{medi_seq}
+	</update>
 </mapper>
 
 

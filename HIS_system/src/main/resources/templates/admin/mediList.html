@@ -26,10 +26,10 @@
 	   	<tr>
 		
 		<th:block th:unless="${#lists.isEmpty(list)}">
-			<tr th:each="dto:${list}" th:if="${dto.job=='dr'}">
+			<tr th:each="dto:${list}" th:if="${dto.job=='DR'}">
 				<td th:text="${dto.medi_seq}"></td>
 				<td>
-					<a th:href="@{/admin/updateMedi(medi_seq=${dto.medi_seq})}"
+					<a th:href="@{/admin/mediDetail(medi_seq=${dto.medi_seq})}"
 					   th:text="${dto.name}"></a>
 				</td>
 				<td th:text="${dto.dept}"></td>
@@ -47,10 +47,10 @@
 	   	<tr>
 		
 		<th:block th:unless="${#lists.isEmpty(list)}">
-			<tr th:each="dto:${list}" th:if="${dto.job=='rn'}">
+			<tr th:each="dto:${list}" th:if="${dto.job=='RN'}">
 				<td th:text="${dto.medi_seq}"></td>
 				<td>
-					<a th:href="@{/admin/updateMedi(medi_seq=${dto.medi_seq})}"
+					<a th:href="@{/admin/mediDetail(medi_seq=${dto.medi_seq})}"
 					   th:text="${dto.name}"></a>
 				</td>
 				<td th:text="${dto.dept}"></td>
@@ -63,6 +63,4 @@
 </div>
 </body>
 </html>
-
-
 

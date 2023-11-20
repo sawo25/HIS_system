@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.his.command.LoginCommand;
+import com.his.command.MediInsertCommand;
+import com.his.command.MediUpdateCommand;
 import com.his.dtos.AdminDto;
 import com.his.dtos.MediDto;
 import com.his.mapper.AdminMapper;
@@ -50,5 +52,29 @@ public class AdminService {
 	
 	public List<MediDto> getMediList(){
 		return adminMapper.getMediList();
+	}
+	
+	public boolean addMedi(MediInsertCommand mediInsertCommand) {
+		MediDto dto=new MediDto();
+		dto.setJob(mediInsertCommand.getJob());
+		dto.setName(mediInsertCommand.getName());
+		dto.setDept(mediInsertCommand.getDept());
+		dto.setPhone(mediInsertCommand.getPhone());
+
+		return adminMapper.addMedi(dto);
+	}
+	
+	public MediDto getMedi(int medi_seq) {
+		return adminMapper.getMedi(medi_seq);
+	}
+	
+	public boolean mediUpdate(MediUpdateCommand mediUpdateCommand) {
+		MediDto dto=new MediDto();
+		
+		dto.setMedi_seq(mediUpdateCommand.getMedi_seq());
+		dto.setDept(mediUpdateCommand.getDept());
+		dto.setPhone(mediUpdateCommand.getPhone());
+		
+		return adminMapper.mediUpdate(dto);
 	}
 }

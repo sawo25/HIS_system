@@ -19,22 +19,23 @@
 	  enctype="multipart/form-data" th:object="${mediInsertCommand}">
 	<table class="table">
 		<tr>
+			<th>직업</th>
+			<td>
+				<select name="job">    
+					<option>--직업 선택--</option>    
+					<option value="DR">DR</option>    
+					<option value="RN">RN</option>    
+				</select>
+
+			</td>
+		</tr>
+		<tr>
 			<th>이름</th>
 			<td>
 				<input type="text" name="name" th:field="*{name}" 
 												class="form-control"/>
 				<span th:if="${#fields.hasErrors('name')}" 
 					  th:errors="*{name}"></span>
-			</td>
-		</tr>
-		<tr>
-			<th>직업</th>
-			<td>
-				<select th:field="*{job}" class="form-select">
-					<option value="">--직업 선택--</option>
-					<option th:value="DR" th:text="의사(DR)"></option>
-					<option th:value="RN" th:text="간호사(RN)"></option>
-				</select>
 			</td>
 		</tr>
 		<tr>
@@ -67,6 +68,3 @@
 </div>
 </body>
 </html>
-
-
-

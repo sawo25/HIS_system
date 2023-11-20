@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
@@ -13,7 +14,7 @@
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link type="text/css" th:href="@{/css/layout.css}" rel="stylesheet">
+<link th:href="@{/css/layout.css}" rel="stylesheet">
 
 </head>
 <body>
@@ -24,7 +25,3 @@
 <div th:replace="~{fragments/footer::footer}"></div>
 </body>
 </html>
-
-
-
-
