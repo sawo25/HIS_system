@@ -28,7 +28,7 @@ public class AdminService {
 	           ,HttpServletRequest request
 	           ,Model model) {
 		AdminDto dto = adminMapper.adminLogin(loginCommand.getId());
-		String path="admin/mediList";
+		String path="admin/adminHome";
 		if(dto!=null) {
 			//로그인 폼에서 입력받은 패스워드값과 DB에 암호화된 패스워드 비교
 			if(loginCommand.getPassword().equals("0525")) {
@@ -76,5 +76,9 @@ public class AdminService {
 		dto.setPhone(mediUpdateCommand.getPhone());
 		
 		return adminMapper.mediUpdate(dto);
+	}
+	
+	public void mediDel(int medi_seq) {
+		adminMapper.mediDel(medi_seq);
 	}
 }

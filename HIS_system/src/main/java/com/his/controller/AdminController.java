@@ -8,16 +8,22 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.his.command.LoginCommand;
+import com.his.command.MediDelCommand;
 import com.his.command.MediInsertCommand;
 import com.his.command.MediUpdateCommand;
 import com.his.dtos.MediDto;
 import com.his.service.AdminService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.websocket.server.PathParam;
 
 @Controller
 @RequestMapping(value="/admin")
@@ -25,6 +31,12 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@GetMapping(value="/adminHome")
+	public String adminHome(Model model) {
+		System.out.println("관리자 폼 이동");
+		return "admin/adminHome";
+	}
 	
 	@GetMapping(value="/adminLogin")
 	public String adminLoginForm(Model model) {
@@ -114,4 +126,10 @@ public class AdminController {
 				+mediUpdateCommand.getMedi_seq();
 	}
 	
+	@GetMapping(value="/mediDel")
+	public String mediDel(int medi_seq){
+		adminService.mediDel(medi_seq);
+				
+		return "redirect:/admin/mediList";
+	}
 }

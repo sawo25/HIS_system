@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+</script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<div layout:fragment="content">
+<h1 style="text-align:center;">관리자 페이지</h1>
+<th:block th:if="${session.mdto==null}">
+	<p>
+		<a href="/admin/adminLogin">관리자 로그인</a>
+	</p>
+</th:block>
+<th:block th:unless="${session.mdto==null}">
+	<p>
+		<span th:text="${session.mdto.id}" >로그인 상태</span>
+	</p>
+</th:block>
+	<p><a href="/admin/mediList">의료진 목록</a></p>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+

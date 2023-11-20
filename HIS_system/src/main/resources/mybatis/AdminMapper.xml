@@ -26,6 +26,10 @@
 		SET DEPT=#{dept}, PHONE=#{phone}
 		WHERE MEDI_SEQ=#{medi_seq}
 	</update>
+	<delete id="mediDel" parameterType="Integer">
+		DELETE FROM MEDI
+		WHERE MEDI_SEQ=#{medi_seq}
+	</delete>
 </mapper>
 
 

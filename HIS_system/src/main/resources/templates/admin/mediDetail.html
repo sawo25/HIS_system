@@ -6,7 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
+	function updateEX(){
+		if(confirm("수정하시겠습니까?")){
+			return true;
+		}
+		return false
+	}
 </script>
 <style type="text/css">
 
@@ -48,7 +53,7 @@
 	  	<tr>
 	  		<td colspan="2">
 	  			<button type="submit" class="btn">수정</button>
-	  			<button type="button" class="btn" th:onclick="">삭제</button>	  			
+	  			<button type="button" class="btn" th:onclick="|location.href='@{/admin/mediDel(medi_seq=${dto.medi_seq})}'|">삭제</button>	  			
 	  			<button type="button" class="btn" th:onclick="|location.href='@{/admin/mediList}'|">목록</button>
 	  		</td>
 	  	</tr>
