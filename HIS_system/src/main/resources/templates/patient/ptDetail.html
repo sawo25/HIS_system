@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function updateEx(){
+		if(confirm("수정하시겠습니까?")){
+			return true;
+		}
+		return false;
+	}
+</script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<div layout:fragment="content">
+<h1>환자 상세</h1>
+<form action="/patient/ptUpdate" method="post" onsubmit="return updateEx()" th:object="${ptUpdateCommand}">
+	  <input style="border: none; font-size: x-large;" type="text" readonly name="pt_seq" th:value="${dto.pt_seq}"/>
+	  <table class="table">
+	  	<tr>
+	  		<th>담당의사 SEQ</th>
+	  		<td>
+				<select name="medi_seq">    
+					<option value="">-- 번호 선택 --</option>
+        			<option th:each="dto:${mlist}"th:if="${dto.job=='DR'}" th:value="${dto.medi_seq}" 
+               				th:utext="${dto.medi_seq}">
+        			</option>
+				</select>
+			</td>
+	  	</tr>
+	  	<tr>
+	  		<th>이름</th>
+	  		<td th:text="${dto.name}"></td>
+	  	</tr>
+	  	<tr>
+	  		<th>진료과</th>
+	  		<td>
+				<select name="dept">    
+					<option value="">-- 부서 선택 --</option>
+        			<option th:each="dto:${mlist}"th:if="${dto.job=='DR'}" th:value="${dto.dept}" 
+               				th:utext="${dto.dept}">
+        			</option>
+				</select>
+			</td>
+	  	</tr>
+	  	<tr>
+	  		<th>성별</th>
+	  		<td th:text="${dto.sex}"></td>
+	  	</tr>
+	  	<tr>
+	  		<th>키</th>
+	  		<td>
+				<input type="text" name="height" th:value="${dto.height}" class="form-control"/>
+	  			<span th:if="${#fields.hasErrors('height')}" 
+	  				  th:errors="*{height}"></span>
+			</td>
+	  	</tr>
+	  	<tr>
+	  		<th>몸무게</th>
+	  		<td>
+				<input type="text" name="weight" th:value="${dto.weight}" class="form-control"/>
+	  			<span th:if="${#fields.hasErrors('weight')}" 
+	  				  th:errors="*{weight}"></span>
+			</td>
+	  	</tr>
+	  	<tr>
+	  		<th>병명</th>
+	  		<td>
+				<input type="text" name="diseas" th:value="${dto.diseas}" class="form-control"/>
+	  			<span th:if="${#fields.hasErrors('diseas')}" 
+	  				  th:errors="*{diseas}"></span>
+			</td>
+	  	</tr>
+	  	<tr>
+	  		<td colspan="2">
+	  			<button type="submit" class="btn">수정</button>
+	  			<button type="button" class="btn" th:onclick="|location.href='@{/patient/ptDel(pt_seq=${dto.pt_seq})}'|">삭제</button>	  			
+	  			<button type="button" class="btn" th:onclick="|location.href='@{/patient/ptChart}'|">목록</button>
+	  		</td>
+	  	</tr>
+	  </table>
+</form>
+</div>
+</body>
+</html>
+

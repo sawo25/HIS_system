@@ -21,4 +21,5 @@ public interface AdminMapper {
 	public boolean mediUpdate(MediDto dto);
 
 	public void mediDel(int medi_seq);
+
 }

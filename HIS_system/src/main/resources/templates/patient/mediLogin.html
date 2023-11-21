@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+</script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<div layout:fragment="content">
+<h1 style="text-align:center;">의료진 인증</h1>
+<form action="/patient/mediLogin" method="post" th:object="${mediLoginCommand}">
+	<table class="table">
+		<tr>
+			<th>의료진 번호:</th>
+			<td>
+				<input type="number" class="form-control"
+				      name="medi_seq" th:field="*{medi_seq}" />
+				<span th:if="${#fields.hasErrors('medi_seq')}"
+				      th:errors="*{medi_seq}" class="errorField"></span>          
+			</td>
+		</tr>
+		<tr>
+			<th>이름:</th>
+			<td>
+				<input type="text" class="form-control"
+				      name="name" th:field="*{name}" />
+				<span th:if="${#fields.hasErrors('name')}"
+				      th:errors="*{name}" class="errorField"></span>      
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				  <input type="submit" value="로그인" class="btn"/>
+				  <span th:text="${msg}"></span> 
+			</td>
+		</tr>
+	</table>
+</form>
+</div>
+</body>
+</html>
+
+
+
+
+

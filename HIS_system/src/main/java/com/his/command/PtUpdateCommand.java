@@ -1,31 +1,31 @@
-package com.his.dtos;
+package com.his.command;
 
-import org.apache.ibatis.type.Alias;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-@Alias(value="ptDto")
-public class PtDto {
-
+public class PtUpdateCommand {
 	private int pt_seq;
+	@NotNull(message = "담당 의료진을 선택하세요")
 	private int medi_seq;
-	private String name;
+	@NotBlank(message = "부서를 입력하세요")
 	private String dept;
-	private String sex;
+	@NotNull(message = "신장을 입력하세요")
 	private int height;
+	@NotNull(message = "몸무게를 입력하세요")
 	private int weight;
+	@NotBlank(message = "질병을 입력하세요")
 	private String diseas;
-	
-	public PtDto() {
+	public PtUpdateCommand() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public PtDto(int pt_seq, int medi_seq, String name, String dept, String sex, int height, int weight,
-			String diseas) {
+	public PtUpdateCommand(int pt_seq, @NotNull(message = "담당 의료진을 선택하세요") int medi_seq,
+			@NotBlank(message = "부서를 입력하세요") String dept, @NotNull(message = "신장을 입력하세요") int height,
+			@NotNull(message = "몸무게를 입력하세요") int weight, @NotBlank(message = "질병을 입력하세요") String diseas) {
 		super();
 		this.pt_seq = pt_seq;
 		this.medi_seq = medi_seq;
-		this.name = name;
 		this.dept = dept;
-		this.sex = sex;
 		this.height = height;
 		this.weight = weight;
 		this.diseas = diseas;
@@ -42,23 +42,11 @@ public class PtDto {
 	public void setMedi_seq(int medi_seq) {
 		this.medi_seq = medi_seq;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public String getDept() {
 		return dept;
 	}
 	public void setDept(String dept) {
 		this.dept = dept;
-	}
-	public String getSex() {
-		return sex;
-	}
-	public void setSex(String sex) {
-		this.sex = sex;
 	}
 	public int getHeight() {
 		return height;
@@ -80,8 +68,8 @@ public class PtDto {
 	}
 	@Override
 	public String toString() {
-		return "PtDto [pt_seq=" + pt_seq + ", medi_seq=" + medi_seq + ", name=" + name + ", dept=" + dept + ", sex="
-				+ sex + ", height=" + height + ", weight=" + weight + ", diseas=" + diseas + "]";
+		return "PtUpdateCommand [pt_seq=" + pt_seq + ", medi_seq=" + medi_seq + ", dept=" + dept + ", height=" + height
+				+ ", weight=" + weight + ", diseas=" + diseas + "]";
 	}
 	
 	

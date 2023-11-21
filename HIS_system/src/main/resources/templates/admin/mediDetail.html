@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layouts/layout}">
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layouts/layout}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function updateEX(){
+	function updateEx(){
 		if(confirm("수정하시겠습니까?")){
 			return true;
 		}
-		return false
+		return false;
 	}
 </script>
 <style type="text/css">
@@ -19,15 +19,12 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h1 style="text-align:center;">의료진 수정</h1>
+<h1>의료진 상세</h1>
 <form action="/admin/mediUpdate" method="post" onsubmit="return updateEx()" th:object="${mediUpdateCommand}">
+	  <input style="border: none; font-size: x-large;" type="text" readonly name="medi_seq" th:value="${dto.medi_seq}"/>
 	  <table class="table">
 	  	<tr>
-	  		<th>SEQ</th>
-	  		<td th:text="${dto.medi_seq}"></td>
-	  	</tr>
-	  	<tr>
-	  		<th>직업</th>
+	  		<th>ROLE</th>
 	  		<td th:text="${dto.job}"></td>
 	  	</tr>
 	  	<tr>
@@ -62,4 +59,3 @@
 </div>
 </body>
 </html>
-

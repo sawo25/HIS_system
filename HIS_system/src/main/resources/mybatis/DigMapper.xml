@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.his.mapper.DigMapper">
+	<select id="digViewList" parameterType="String" resultType="digDto">
+		SELECT *
+		FROM (SELECT ROW_NUMBER() over(PARTITION BY SUBSTR(mdate,1,8)
+								 ORDER BY mdate) rn, seq, id, title, content, mdate, regdate
+				FROM calboard
+				WHERE id = #{id} AND SUBSTR(mdate,1,6)=#{yyyyMM} ) cal
+		WHERE rn BETWEEN 1 AND 4
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

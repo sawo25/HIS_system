@@ -21,10 +21,12 @@
 		<tr>
 			<th>담당 의료진 번호</th>
 			<td>
-				<input type="text" name="medi_seq" th:field="*{medi_seq}" 
-												class="form-control"/>
-				<span th:if="${#fields.hasErrors('medi_seq')}" 
-					  th:errors="*{medi_seq}"></span>
+				<select name="medi_seq">    
+					<option value="">-- 번호 선택 --</option>
+        			<option th:each="dto:${mlist}"th:if="${dto.job=='DR'}" th:value="${dto.medi_seq}" 
+               				th:utext="${dto.medi_seq}">
+        			</option>
+				</select>
 			</td>
 		</tr>
 		<tr>
@@ -39,10 +41,12 @@
 		<tr>
 			<th>부서</th>
 			<td>
-				<input type="text" name="dept" th:field="*{dept}" 
-												class="form-control"/>
-				<span th:if="${#fields.hasErrors('dept')}" 
-					  th:errors="*{dept}"></span>
+				<select name="dept">    
+					<option value="">-- 부서 선택 --</option>
+        			<option th:each="dto:${mlist}"th:if="${dto.job=='DR'}" th:value="${dto.dept}" 
+               				th:utext="${dto.dept}">
+        			</option>
+				</select>
 			</td>
 		</tr>
 		<tr>
@@ -86,7 +90,7 @@
 			<td colspan="2">
 				<button type="submit" class="btn">등록</button>
 				<button type="button" class="btn"
-				 th:onclick="|location.href='@{/patient/ptChart}'|">의료진 목록</button>
+				 th:onclick="|location.href='@{/patient/ptChart}'|">환자 목록</button>
 			</td>
 		</tr>
 	</table>

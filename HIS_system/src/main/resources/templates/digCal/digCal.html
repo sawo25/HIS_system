@@ -1,27 +1,111 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{thymeleaf/layouts/layout}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-
-</script>
+<title></title>
 <style type="text/css">
-
+	.cal{width: 100%;}
+	.cal #thead > div, .cal #tbody > div{display: inline-block;
+										 width: 140px;}
+	#ctitle > a, #ctitle > span {
+		font-size: x-large;
+		font-weight: bold;
+	}
+			 
+	.cal #tbody > div{
+		height:120px;
+		width:136px;
+		vertical-align: top;
+		border-top:1px solid gray;
+		position: relative
+	}
+	
+	#ctitle{
+		text-align: center;
+	}
+	
+	#thead > div {
+		font-size: large;
+		font-weight: bold;
+	}
+	
+	.pen{
+		width:30px;
+		height:30px;
+	}
+	
+	.d{
+		font-size:large;
+	}
+	
+	#tbody > div > p{
+		background-color:#9BFFDA;
+		float:left;
+		font-weight:bold;
+	}
+	
+	.cp{
+		position: absolute;
+		left: 20px;
+		top: -30px;
+		width:40px;
+		height:40px;
+		border-radius:20px 20px 20px 1px;
+		background-color: #dcdcdc;
+		line-height:40px;
+		text-align:center;
+		font-weight:bold;
+		font-size: medium;
+	}
 </style>
+<script type="text/javascript">
+</script>
 </head>
 <body>
 <div layout:fragment="content">
-<h1 style="text-align:center;">진료 일정</h1>
-		
-			
+	<div id="container">
+		<h1>일정관리[달력보기]</h1>
+		<br><br>
+		<div class="cal">
+			<div id="ctitle">
+				<a th:href="@{/schedule/calendar(year=${calMap.year-1},month=${calMap.month})}">◁</a>
+				<a th:href="@{/schedule/calendar(year=${calMap.year},month=${calMap.month-1})}">◀</a>
+				<span class="y" th:text="${calMap.year}"></span>
+				<span>년</span>
+				<span class="m" th:text="${calMap.month}"></span>
+				<span>월</span>
+				<a th:href="@{/schedule/calendar(year=${calMap.year},month=${calMap.month+1})}">▶</a>
+				<a th:href="@{/schedule/calendar(year=${calMap.year+1},month=${calMap.month})}">▷</a>
+			</div>
+			<br>
+			<div id="thead">
+				<div>일</div><div>월</div><div>화</div><div>수</div>
+				<div>목</div><div>금</div><div>토</div>
+			</div>
+			<div id="tbody">
+				<th:block th:if="${calMap.dayOfWeek>1}">
+					<div th:each="num:${#numbers.sequence(1,calMap.dayOfWeek-1)}">&nbsp;</div>
+				</th:block>
+				<th:block th:each="i:${#numbers.sequence(1,calMap.lastDay)}">
+					<div> 
+						<a class="d" th:text="${i}"  th:style="'color:'+${@util.fontColor(i,calMap.dayOfWeek)}"
+							th:href="@{/schedule/calBoardList(year=${calMap.year},month=${calMap.month},date=${i})}">
+						</a>
+						<a th:href="@{/schedule/addCalBoardForm(year=${calMap.year},month=${calMap.month},date=${i})}">
+							<img class="pen" th:src="@{/img/pen.png}" />
+						</a><br>
+						[(${@util.getCalViewList(i,clist)})]
+					</div>
+				</th:block>
+				
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 </html>
-
-
 
 
 

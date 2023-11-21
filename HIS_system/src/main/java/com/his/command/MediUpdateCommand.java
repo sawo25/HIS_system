@@ -10,6 +10,7 @@ public class MediUpdateCommand {
 	private String dept;
 	@NotBlank(message = "번호를 입력하세요")
 	private String phone;
+	
 	public MediUpdateCommand() {
 		super();
 		// TODO Auto-generated constructor stub

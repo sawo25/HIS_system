@@ -10,8 +10,31 @@
 	
 	<insert id="addPt" parameterType="ptDto">
 		INSERT INTO PT
-		VALUES (NULL,#{MEDI_SEQ},#{NAME},#{DEPT},#{SEX},#{HEIGHT},#{WEIGHT},#{DISEAS})
+		VALUES (NULL,#{medi_seq},#{name},#{dept},#{sex},#{height},#{weight},#{diseas})
 	</insert>
+	
+	<select id="getPt" parameterType="Integer" resultType="ptDto">
+		SELECT *
+		FROM PT
+		WHERE PT_SEQ=#{pt_seq}
+	</select>
+	
+	<update id="ptUpdate" parameterType="ptDto">
+		UPDATE PT
+		SET MEDI_SEQ=#{medi_seq}, DEPT=#{dept}, HEIGHT=#{height}, WEIGHT=#{weight}, DISEAS=#{diseas}
+		WHERE PT_SEQ=#{pt_seq}
+	</update>
+	
+	<delete id="ptDel" parameterType="Integer">
+		DELETE FROM PT
+		WHERE PT_SEQ=#{pt_seq}
+	</delete>
+	
+	<select id="mediLogin" parameterType="Integer" resultType="mediDto">
+		SELECT MEDI_SEQ, NAME, JOB
+		FROM MEDI
+		WHERE MEDI_SEQ = #{medi_seq}
+	</select>
 </mapper>
 
 

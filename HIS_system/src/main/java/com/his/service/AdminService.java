@@ -16,7 +16,6 @@ import com.his.mapper.AdminMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-
 @Service
 public class AdminService {
 	@Autowired

@@ -15,8 +15,15 @@
 <body>
 <div layout:fragment="content">
 <h1 style="text-align:center;">환자 차트</h1>
+<th:block th:unless="${session.dto==null}">
+	<p>
+		<span th:text="${session.dto.name}+${session.dto.job}+인증상태" >의료진 인증 상태</span>
+	</p>
+</th:block>
+<button style="float: right;" type="button" class="btn" th:onclick="|location.href='@{/patient/mediLogin}'|">의료진 인증</button>
+<br>
 <form action="/patient/ptInsert" method="get" th:object="${ptInsertCommand}">
-	   <h4>의사</h4>
+	   <h4>환자</h4>
 	   <table class="table">
 	   	<tr>
 				<th>PT_SEQ</th>
