@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.his.command.DiseasCommand;
 import com.his.dtos.AdminDto;
 import com.his.dtos.MediDto;
 import com.his.dtos.PtDto;
@@ -23,4 +24,5 @@ public interface PtMapper {
 	
 	public MediDto mediLogin(int medi_seq);
 
+	public boolean diseasUpdate(String diseas, int pt_seq);
 }

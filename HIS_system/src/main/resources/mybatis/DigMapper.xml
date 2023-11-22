@@ -3,13 +3,45 @@
 
 <mapper namespace="com.his.mapper.DigMapper">
 	<select id="digViewList" parameterType="String" resultType="digDto">
-		SELECT *
-		FROM (SELECT ROW_NUMBER() over(PARTITION BY SUBSTR(mdate,1,8)
-								 ORDER BY mdate) rn, seq, id, title, content, mdate, regdate
-				FROM calboard
-				WHERE id = #{id} AND SUBSTR(mdate,1,6)=#{yyyyMM} ) cal
-		WHERE rn BETWEEN 1 AND 4
+		SELECT rn, dig_seq, pt_seq, medi_seq, diseas, content, dig_date
+		FROM (SELECT ROW_NUMBER() over
+		(PARTITION BY SUBSTR(dig_date,1,8) ORDER BY dig_date) rn, dig_seq, pt_seq, medi_seq, diseas, content, dig_date
+		FROM dig
+		WHERE SUBSTR(dig_date,1,6)=#{yyyyMM} ) dig1
+		WHERE rn BETWEEN 1 AND 4;
 	</select>
+	
+	<insert id="insertDig" parameterType="digDto">
+		INSERT INTO dig 
+		VALUES(NULL,#{pt_seq},#{medi_seq},#{diseas},#{content},#{dig_date})
+	</insert>
+	
+	<select id="digList" parameterType="String" resultType="digDto">
+		SELECT DIG_SEQ, PT_SEQ, MEDI_SEQ, DISEAS, CONTENT, DIG_DATE
+		FROM DIG
+		WHERE SUBSTRING(dig_date,1,8) = #{yyyyMMdd}
+	</select>
+	
+	<select id="getDig" parameterType="int" resultType="digDto">
+		SELECT *
+		FROM DIG
+		WHERE dig_seq=#{dig_seq}
+	</select>
+	
+	<update id="digUpdate" parameterType="digDto">
+		UPDATE DIG
+		SET DISEAS=#{diseas}, content=#{content}
+		WHERE dig_seq=#{dig_seq}
+	</update>
+
+	<delete id="digMulDel" parameterType="Map">
+		DELETE FROM DIG
+		WHERE dig_seq IN 
+		<foreach collection="dig_seqs" item="dig_seq" 
+					open="(" close=")" separator=",">
+			#{dig_seq}
+		</foreach>
+	</delete>
 </mapper>
 
 

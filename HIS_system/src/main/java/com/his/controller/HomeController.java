@@ -2,6 +2,7 @@ package com.his.controller;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +44,12 @@ public class HomeController {
 		
 		String yyyyMM=year+Util.isTwo(month);
 		
+		List<DigDto> dlist=digService.digViewList(yyyyMM);
 		
+		model.addAttribute("dlist",dlist);
+		
+		Map<String, Integer> map=digService.makeDigCalendar(request);
+		model.addAttribute("digMap",map);
 		
 		return "digCal/digCal";
 	}

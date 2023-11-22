@@ -3,7 +3,7 @@
 
 <mapper namespace="com.his.mapper.PtMapper">
 	<select id="getPtList" resultType="ptDto">
-		SELECT *
+		SELECT PT_SEQ, MEDI_SEQ, NAME, DEPT, SEX, HEIGHT, WEIGHT, DISEAS
 		FROM PT
 		ORDER BY PT_SEQ ASC
 	</select>
@@ -35,6 +35,12 @@
 		FROM MEDI
 		WHERE MEDI_SEQ = #{medi_seq}
 	</select>
+	
+	<update id="diseasUpdate" parameterType="Map">
+		UPDATE PT
+		SET DISEAS=#{diseas}
+		WHERE PT_SEQ=#{pt_seq}
+	</update>
 </mapper>
 
 

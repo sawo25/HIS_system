@@ -85,14 +85,14 @@ public class PtConroller {
 	@GetMapping(value="/ptDetail")
 	public String ptDetail(int pt_seq, Model model) {
 		PtDto dto=ptService.getPt(pt_seq);
-		
+		//
 		List<MediDto> mlist=adminService.getMediList();
 		model.addAttribute("mlist",mlist);
 		
 		MediDto mdto=new MediDto();
 		mdto.getMedi_seq();
 		model.addAttribute("mdto",mdto);
-		
+		//
 		model.addAttribute("ptUpdateCommand",new PtUpdateCommand());
 		
 		model.addAttribute("dto",dto);

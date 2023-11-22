@@ -30,6 +30,7 @@
 		DELETE FROM MEDI
 		WHERE MEDI_SEQ=#{medi_seq}
 	</delete>
+	
 </mapper>
 
 

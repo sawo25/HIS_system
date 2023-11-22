@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<div layout:fragment="content">
+<div id="container">
+	<h1 style="text-align:center;">진료 기록 추가</h1>
+	<form th:action="@{/digCal/insertDig}" method="post"
+												th:object="${insertDigCommand}">
+		<table class="table">
+			<tr>
+				<th>진료 환자 번호</th>
+				<td>
+					<select name="pt_seq">    
+						<option value="">-- 번호 선택 --</option>
+        				<option th:each="pdto:${plist}" th:value="${pdto.pt_seq}" 
+               					th:utext="${pdto.pt_seq}">
+        				</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>진료 의사 번호</th>
+				<td>
+					<select name="medi_seq">    
+						<option value="">-- 번호 선택 --</option>
+        				<option th:each="mdto:${mlist}" th:if="${mdto.job=='DR'}" th:value="${mdto.medi_seq}" 
+               					th:utext="${mdto.medi_seq}">
+        				</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>진료일</th>
+				<td>
+					<select name="year">
+						<th:block th:each="i:${#numbers.sequence(insertDigCommand.year-5,insertDigCommand.year+5)}">
+							<th:block th:if="${insertDigCommand.year==i}">
+								<option th:value="${i}" th:text="${i}" selected="selected"></option>
+							</th:block>
+							<th:block th:unless="${insertDigCommand.year==i}">
+								<option th:value="${i}" th:text="${i}"></option>
+							</th:block>
+						</th:block>
+					</select> 년
+					<select name="month">
+						<th:block th:each="i:${#numbers.sequence(1,12)}">
+							<th:block th:if="${insertDigCommand.month==i}">
+								<option th:value="${i}" th:text="${i}" selected="selected"></option>
+							</th:block>
+							<th:block th:unless="${insertDigCommand.month==i}">
+								<option th:value="${i}" th:text="${i}"></option>
+							</th:block>
+						</th:block>
+					</select> 월
+					<select name="date">
+						<th:block th:each="i:${#numbers.sequence(1,31)}">
+							<th:block th:if="${insertDigCommand.date==i}">
+								<option th:value="${i}" th:text="${i}" selected="selected"></option>
+							</th:block>
+							<th:block th:unless="${insertDigCommand.date==i}">
+								<option th:value="${i}" th:text="${i}"></option>
+							</th:block>
+						</th:block>
+					</select> 일
+					<select name="hour">
+						<th:block th:each="i:${#numbers.sequence(0,23)}">
+								<option th:value="${i}" th:text="${i}"></option>
+						</th:block>
+					</select> 시
+					<select name="min">
+						<th:block th:each="i:${#numbers.sequence(0,59)}">
+								<option th:value="${i}" th:text="${i}"></option>
+						</th:block>
+					</select> 분
+				</td>
+			</tr>
+			<tr>
+				<th>병명</th>
+				<td>
+					<input type="text" name="diseas" th:field="*{diseas}" 
+												class="form-control"/>
+					<span th:if="${#fields.hasErrors('diseas')}" 
+					  th:errors="*{diseas}"></span>
+				</td>
+			</tr>
+			<tr>
+				<th>진료 내용</th>
+				<td>
+					<textarea rows="10" cols="60" name="content" th:field="*{content}"></textarea>
+					<span class="errorField" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="일정추가"/>
+					<input type="button" value="달력"
+								th:onclick="|location.href='@{/(year=${session.ymdMap.year},month=${session.ymdMap.month})}'|"/>
+				</td>
+			</tr>
+			
+		</table>
+	</form>
+</div>
+</div>
+</body>
+</html>

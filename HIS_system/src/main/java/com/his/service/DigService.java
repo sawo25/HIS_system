@@ -8,8 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.his.command.DiseasCommand;
+import com.his.command.InsertDigCommand;
+import com.his.command.UpdateDigCommand;
 import com.his.dtos.DigDto;
+import com.his.dtos.PtDto;
 import com.his.mapper.DigMapper;
+import com.his.mapper.PtMapper;
+import com.his.util.Util;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -17,6 +23,8 @@ import jakarta.servlet.http.HttpServletRequest;
 public class DigService {
 
 	@Autowired DigMapper digMapper;
+	
+	@Autowired PtMapper ptMapper;
 	
 	public Map<String, Integer> makeDigCalendar(HttpServletRequest request){
 		Map<String, Integer> map=new HashMap<>();
@@ -59,5 +67,45 @@ public class DigService {
 	public List<DigDto> digViewList(String yyyyMM) {
 		
 		return digMapper.digViewList(yyyyMM);
+	}
+	
+	public boolean insertDig(InsertDigCommand insertDigCommand) throws Exception {
+		String dig_date=insertDigCommand.getYear()+""
+				+Util.isTwo(insertDigCommand.getMonth()+"")
+				+Util.isTwo(insertDigCommand.getDate()+"")
+				+Util.isTwo(insertDigCommand.getHour()+"")
+				+Util.isTwo(insertDigCommand.getMin()+"");
+		
+		DigDto dto=new DigDto();
+		dto.setPt_seq(insertDigCommand.getPt_seq());
+		dto.setMedi_seq(insertDigCommand.getMedi_seq());
+		dto.setDiseas(insertDigCommand.getDiseas());
+		dto.setContent(insertDigCommand.getContent());
+		dto.setDig_date(dig_date);
+		
+		int pt=dto.getPt_seq();
+		ptMapper.diseasUpdate(insertDigCommand.getDiseas(), pt);
+		
+		int count=digMapper.insertDig(dto);
+		
+		return count>0?true:false;
+	}
+
+	public List<DigDto> digList(String yyyyMMdd){
+		return digMapper.digList(yyyyMMdd);
+	}
+
+	public DigDto getDig(int dig_seq) {
+		return digMapper.getDig(dig_seq);
+	}
+	
+	public boolean digUpdate(UpdateDigCommand updateDigCommand) {
+		
+	    DigDto dto=new DigDto();
+		dto.setDig_seq(updateDigCommand.getDig_seq());
+		dto.setDiseas(updateDigCommand.getDiseas());
+		dto.setContent(updateDigCommand.getContent());
+		
+		return digMapper.digUpdate(dto);
 	}
 }

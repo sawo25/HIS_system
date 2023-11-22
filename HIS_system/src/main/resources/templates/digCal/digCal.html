@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{thymeleaf/layouts/layout}">
+	  layout:decorate="~{layouts/layout}">
 <head>
 <meta charset="UTF-8">
 <title></title>
@@ -66,18 +66,18 @@
 <body>
 <div layout:fragment="content">
 	<div id="container">
-		<h1>일정관리[달력보기]</h1>
+		<h1 style="text-align:center;">진료 일정</h1>
 		<br><br>
 		<div class="cal">
 			<div id="ctitle">
-				<a th:href="@{/schedule/calendar(year=${calMap.year-1},month=${calMap.month})}">◁</a>
-				<a th:href="@{/schedule/calendar(year=${calMap.year},month=${calMap.month-1})}">◀</a>
-				<span class="y" th:text="${calMap.year}"></span>
+				<a th:href="@{/(year=${digMap.year-1},month=${digMap.month})}">◁</a>
+				<a th:href="@{/(year=${digMap.year},month=${digMap.month-1})}">◀</a>
+				<span class="y" th:text="${digMap.year}"></span>
 				<span>년</span>
-				<span class="m" th:text="${calMap.month}"></span>
+				<span class="m" th:text="${digMap.month}"></span>
 				<span>월</span>
-				<a th:href="@{/schedule/calendar(year=${calMap.year},month=${calMap.month+1})}">▶</a>
-				<a th:href="@{/schedule/calendar(year=${calMap.year+1},month=${calMap.month})}">▷</a>
+				<a th:href="@{/(year=${digMap.year},month=${digMap.month+1})}">▶</a>
+				<a th:href="@{/(year=${digMap.year+1},month=${digMap.month})}">▷</a>
 			</div>
 			<br>
 			<div id="thead">
@@ -85,18 +85,18 @@
 				<div>목</div><div>금</div><div>토</div>
 			</div>
 			<div id="tbody">
-				<th:block th:if="${calMap.dayOfWeek>1}">
-					<div th:each="num:${#numbers.sequence(1,calMap.dayOfWeek-1)}">&nbsp;</div>
+				<th:block th:if="${digMap.dayOfWeek>1}">
+					<div th:each="num:${#numbers.sequence(1,digMap.dayOfWeek-1)}">&nbsp;</div>
 				</th:block>
-				<th:block th:each="i:${#numbers.sequence(1,calMap.lastDay)}">
+				<th:block th:each="i:${#numbers.sequence(1,digMap.lastDay)}">
 					<div> 
-						<a class="d" th:text="${i}"  th:style="'color:'+${@util.fontColor(i,calMap.dayOfWeek)}"
-							th:href="@{/schedule/calBoardList(year=${calMap.year},month=${calMap.month},date=${i})}">
+						<a class="d" th:text="${i}"  th:style="'color:'+${@util.fontColor(i,digMap.dayOfWeek)}"
+							th:href="@{/digCal/digList(year=${digMap.year},month=${digMap.month},date=${i})}">
 						</a>
-						<a th:href="@{/schedule/addCalBoardForm(year=${calMap.year},month=${calMap.month},date=${i})}">
-							<img class="pen" th:src="@{/img/pen.png}" />
+						<a th:href="@{/digCal/insertDigForm(year=${digMap.year},month=${digMap.month},date=${i})}">
+							<img style="padding: 2px;" class="pen" th:src="@{/img/chart.png}" />
 						</a><br>
-						[(${@util.getCalViewList(i,clist)})]
+						[(${@util.getCalViewList(i,dlist)})]
 					</div>
 				</th:block>
 				
