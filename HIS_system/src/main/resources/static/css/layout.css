@@ -2,12 +2,14 @@
 
 
 .content{
-	margin: 70px 150px;   
+	margin: 70px 300px;  
+	font-size: medium;
 }
 
 #container{
 		width: 1000px;
 		margin: 0 auto;
+		font-size: medium;
 	}
 	
 #footer{

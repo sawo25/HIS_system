@@ -1,16 +1,22 @@
 package com.his.util;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import com.his.dtos.DigDto;
+import com.his.dtos.PtDto;
+import com.his.service.PtService;
 
-@Component
+@Component 
 public class Util {
+	
+	@Autowired
+	static PtService ptService;
 	
 	// 한자리를 두자리로 변환
 	public static String isTwo(String str) {
@@ -45,18 +51,20 @@ public class Util {
 	}
 	
 	// 일일별 일정 목록 구하는 기능
-	public static String getCalViewList(int i, List<DigDto> dlist) {
-		
+	public static String getCalViewList(int i, List<DigDto> dlist, List<PtDto> plist) {
+	
 		String d=isTwo(i+"");	// 1 --> 01 
 		String calList="";	// "<p>title</p><p>title</p>"
 		
 		for (int j = 0; j < dlist.size(); j++) {
 			// 한 달 일정 목록 중에 해당일(i)값과 일치하는지 여부 판단
+			int seq=dlist.get(j).getPt_seq();
 			if(dlist.get(j).getDig_date().substring(6,8).equals(d)) {
-				calList+="<p>"+(dlist.get(j).getPt_seq())+"번 환자 진료</p>";
+				calList+="<p>"+seq+"번 환자 진료</p>";
 			}
 		}
 
 		return calList;
 	}
+
 }

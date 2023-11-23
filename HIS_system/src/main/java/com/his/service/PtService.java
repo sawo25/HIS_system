@@ -93,6 +93,10 @@ public class PtService {
 		return path;
 	}
 	
+	public String ptName(int pt_seq) {
+		return ptMapper.ptName(pt_seq);
+	}
+	
 	
 	
 }

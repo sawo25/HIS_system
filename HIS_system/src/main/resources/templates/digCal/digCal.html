@@ -66,7 +66,7 @@
 <body>
 <div layout:fragment="content">
 	<div id="container">
-		<h1 style="text-align:center;">진료 일정</h1>
+		<h1 style="text-align:center; font-weight: bold;">진료 일정</h1>
 		<br><br>
 		<div class="cal">
 			<div id="ctitle">
@@ -96,7 +96,7 @@
 						<a th:href="@{/digCal/insertDigForm(year=${digMap.year},month=${digMap.month},date=${i})}">
 							<img style="padding: 2px;" class="pen" th:src="@{/img/chart.png}" />
 						</a><br>
-						[(${@util.getCalViewList(i,dlist)})]
+						[(${@util.getCalViewList(i,dlist,plist)})]
 					</div>
 				</th:block>
 				

@@ -12,7 +12,7 @@ public class WebMvcConfig2 implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new LoginInterceptor2())
 				.order(1) //우선순위 설정
-				.addPathPatterns("/patient/ptDetail", "/patient/ptInsert")   //전체 요청에 대해 적용
+				.addPathPatterns("/patient/ptDetail", "/patient/ptInsert","/digCal/**")   //전체 요청에 대해 적용
 				.excludePathPatterns("/error");
 	
 //		registry.addInterceptor(new LoginInterceptor())

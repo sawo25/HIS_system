@@ -3,7 +3,6 @@ package com.his.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -20,8 +19,6 @@ import jakarta.servlet.http.HttpServletRequest;
 public class AdminService {
 	@Autowired
 	private AdminMapper adminMapper;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 	
 	public String adminLogin(LoginCommand loginCommand
 	           ,HttpServletRequest request
@@ -30,7 +27,7 @@ public class AdminService {
 		String path="admin/adminHome";
 		if(dto!=null) {
 			//로그인 폼에서 입력받은 패스워드값과 DB에 암호화된 패스워드 비교
-			if(loginCommand.getPassword().equals("0525")) {
+			if(dto.getPassword().equals(loginCommand.getPassword())) {
 				System.out.println("관리자가 맞음");
 				//session객체에 로그인 정보 저장
 				request.getSession().setAttribute("mdto", dto);

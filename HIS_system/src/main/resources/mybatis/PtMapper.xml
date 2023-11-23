@@ -41,6 +41,12 @@
 		SET DISEAS=#{diseas}
 		WHERE PT_SEQ=#{pt_seq}
 	</update>
+	
+	<select id="ptName" parameterType="Integer" resultType="String">
+		SELECT NAME
+		FROM PT
+		WHERE PT_SEQ=#{pt_seq}
+	</select>
 </mapper>
 
 

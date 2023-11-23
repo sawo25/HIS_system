@@ -15,18 +15,22 @@
 <body>
 <div layout:fragment="content">
 	<div id="container">
-		<h1 style="text-align:center;">진료 기록 상세</h1>
+		<h1>일정 상세보기</h1>
 		<form th:action="@{/digCal/digUpdate}" method="post"
-				th:object="${updateDigCommand}">
+			  th:object="${updateDigCommand}">
 			<input type="hidden" name="dig_seq" th:field="*{dig_seq}"/>
 			<table class="table">
 				<tr>
 					<th>진료일</th>
-					<td th:text="${@util.toDates(dto.dig_date)}"></td>
+					<td  th:text="${@util.toDates(dto.dig_date)}"></td>
 				</tr>
 				<tr>
-					<th>환자번호</th>
+					<th>환자 번호</th>
 					<td th:text="${dto.pt_seq}"></td>
+				</tr>
+				<tr>
+					<th>환자 이름</th>
+					<td th:text="${pname}"></td>
 				</tr>
 				<tr>
 					<th>진료 의사 번호</th>
@@ -35,34 +39,35 @@
 				<tr>
 					<th>병명</th>
 					<td>
-						<input class="form-control" type="text" name="diseas"  th:value="${dto.diseas}"/>
+						<input class="form-control" type="text" name="diseas" 
+							th:field="${dto.diseas}"/>
 						<span class="errorField" th:if="${#fields.hasErrors('diseas')}"
-							th:errors="*{diseas}">
-						</span>
+												 th:errors="*{diseas}"></span>	
 					</td>
 				</tr>
 				<tr>
 					<th>진료 내용</th>
-				<td>
-					<textarea rows="10" cols="60" class="form-control" type="text" name="content"  th:field="${dto.content}"></textarea>
-						<span class="errorField" th:if="${#fields.hasErrors('content')}"
-							th:errors="*{content}">
-						</span>
-				</td>
+					<td>
+						<textarea name="content" class="form-control"
+								  rows="10" cols="60" 
+								  th:field="${dto.content}"></textarea>
+					    <span class="errorField" th:if="${#fields.hasErrors('content')}"
+												 th:errors="*{content}"></span>	
+					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<button type="submit" class="btn btn-default">수정</button>
-						<button type="button" title="일정삭제" class="btn btn-default"
+						<button type="submit" class="btn btn-default btn-medium">기록 수정</button>
+						<button type="button" title="진료기록 삭제" class="btn btn-default btn-medium"
 								th:onclick="|location.href='@{/digCal/digMulDel(dig_seq=${updateDigCommand.dig_seq})}'|" >
 						  <span class="glyphicon glyphicon-trash" ></span>
 						</button>
-						<button type="button" title="진료목록" class="btn btn-default"
+						<button type="button" title="진료일정 목록" class="btn btn-default btn-medium"
 								th:onclick="|location.href='@{/digCal/digList}'|" >
 						  <span class="glyphicon glyphicon-list" ></span>
 						</button>
-						<button type="button" title="진료일정[달력]" class="btn btn-default"
-								th:onclick="|location.href='@{/(year=${session.ymdMap.year},month=${session.ymdMap.month})}'|" >                        
+						<button type="button" title="진료달력 보기" class="btn btn-default btn-medium"
+								th:onclick="|location.href='@{/digCal/digCal(year=${session.ymdMap.year},month=${session.ymdMap.month})}'|" >                        
 						  <span class="glyphicon glyphicon-calendar" ></span>
 						</button>
 					</td>
@@ -73,3 +78,4 @@
 </div>
 </body>
 </html>
+

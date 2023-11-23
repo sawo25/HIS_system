@@ -8,11 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.his.command.DiseasCommand;
 import com.his.command.InsertDigCommand;
 import com.his.command.UpdateDigCommand;
 import com.his.dtos.DigDto;
-import com.his.dtos.PtDto;
 import com.his.mapper.DigMapper;
 import com.his.mapper.PtMapper;
 import com.his.util.Util;
@@ -100,12 +98,16 @@ public class DigService {
 	}
 	
 	public boolean digUpdate(UpdateDigCommand updateDigCommand) {
-		
 	    DigDto dto=new DigDto();
+	    
 		dto.setDig_seq(updateDigCommand.getDig_seq());
 		dto.setDiseas(updateDigCommand.getDiseas());
 		dto.setContent(updateDigCommand.getContent());
 		
 		return digMapper.digUpdate(dto);
+	}
+	
+	public boolean digMulDel(Map<String, String[]> map) {
+		return digMapper.digMulDel(map);
 	}
 }

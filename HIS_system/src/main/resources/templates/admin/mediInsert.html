@@ -14,14 +14,15 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h1 style="text-align:center;">의료진 등록</h1>
+<h1 style="text-align:center;">의료진 등록</h1><br>
 <form action="/admin/mediInsert" method="post"
 	  enctype="multipart/form-data" th:object="${mediInsertCommand}">
-	<table class="table">
+	<table style="width: 500px; margin-left:auto; 
+    margin-right:auto;" class="table">
 		<tr>
 			<th>직업</th>
 			<td>
-				<select name="job">    
+				<select class="form-select" aria-label="Default select example" name="job">    
 					<option>--직업 선택--</option>    
 					<option value="DR">DR</option>    
 					<option value="RN">RN</option>    
@@ -32,7 +33,7 @@
 		<tr>
 			<th>이름</th>
 			<td>
-				<input type="text" name="name" th:field="*{name}" 
+				<input style="width: 150px;" type="text" name="name" th:field="*{name}" 
 												class="form-control"/>
 				<span th:if="${#fields.hasErrors('name')}" 
 					  th:errors="*{name}"></span>
@@ -41,7 +42,7 @@
 		<tr>
 			<th>부서</th>
 			<td>
-				<input type="text" name="dept" th:field="*{dept}" 
+				<input style="width: 150px;" type="text" name="dept" th:field="*{dept}" 
 												class="form-control"/>
 				<span th:if="${#fields.hasErrors('dept')}" 
 					  th:errors="*{dept}"></span>
@@ -50,7 +51,7 @@
 		<tr>
 			<th>휴대폰번호</th>
 			<td>
-				<input type="text" name="phone" th:field="*{phone}" 
+				<input style="width: 200px;" type="text" name="phone" th:field="*{phone}" 
 												class="form-control"/>
 				<span th:if="${#fields.hasErrors('phone')}" 
 					  th:errors="*{phone}"></span>
@@ -58,8 +59,8 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button type="submit" class="btn">등록</button>
-				<button type="button" class="btn"
+				<button type="submit" class="btn btn-default btn-medium">등록</button>
+				<button type="button" class="btn btn-default btn-medium"
 				 th:onclick="|location.href='@{/admin/mediList}'|">의료진 목록</button>
 			</td>
 		</tr>

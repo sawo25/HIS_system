@@ -1,5 +1,7 @@
 package com.his.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -121,6 +123,17 @@ public class DigController {
 				       +Util.isTwo(map.get("date"));
 		List<DigDto> list= digService.digList(yyyyMMdd);
 		model.addAttribute("list", list);
+	
+		int[] seqlist=new int[list.size()];
+		for (int i = 0; i < list.size(); i++) {
+			seqlist[i]=list.get(i).getPt_seq();
+		}
+		
+		List<String> pname=new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			pname.add(ptService.ptName(seqlist[i]));
+		}
+		model.addAttribute("pname",pname);
 		
 		return "digCal/digList";
 	}
@@ -130,10 +143,13 @@ public class DigController {
 		logger.info("진료 기록 상세보기");
 		
 		DigDto dto=digService.getDig(dig_seq);
+		int pseq=dto.getPt_seq();
+		String pname=ptService.ptName(pseq);
 		
 		model.addAttribute("updateDigCommand", new UpdateDigCommand());
 		
 		model.addAttribute("dto",dto);
+		model.addAttribute("pname",pname);
 		System.out.println(dto);
 		return "digCal/digDetail";
 	}
@@ -151,6 +167,45 @@ public class DigController {
 		
 		digService.digUpdate(updateDigCommand);
 		return "redirect:/digCal/digDetail?dig_seq="+updateDigCommand.getDig_seq();
+	}
+	
+	@PostMapping(value = "/digMulDel")
+	public String digMulDel(@Validated DelDigCommand delDigCommand,
+							BindingResult result,
+							HttpServletRequest request,
+							Model model) {
+		
+		if(result.hasErrors()) {
+			System.out.println("최소 하나 이상 체크하기");
+			
+			HttpSession session=request.getSession();
+			
+			//session에 저장된 ymd 값은 목록 조회할때 추가되는 코드임
+			Map<String, String>map=(Map<String, String>)session.getAttribute("ymdMap");
+			
+			//달력에서 전달받은 파라미터 year, month, date를 8자리로 만든다.
+			String yyyyMMdd=map.get("year")
+					       +Util.isTwo(map.get("month"))
+					       +Util.isTwo(map.get("date"));
+			List<DigDto> list= digService.digList(yyyyMMdd);
+			model.addAttribute("list", list);
+			return "digCal/digList";
+		}
+		Map<String,String[]>map=new HashMap<>();
+		map.put("dig_seqs", delDigCommand.getDig_seq());
+		digService.digMulDel(map);
+		
+		return "redirect:/digCal/digList";
+	}
+	
+	@GetMapping("/digMulDel")
+	public String dig_Del(String[] dig_seq) {
+		logger.info("일정삭제하기");
+		System.out.println(dig_seq[0]);
+		Map<String,String[]>map=new HashMap<>();
+		map.put("dig_seqs", dig_seq); 
+		digService.digMulDel(map);
+		return "redirect:/digCal/digList";
 	}
 	
 	

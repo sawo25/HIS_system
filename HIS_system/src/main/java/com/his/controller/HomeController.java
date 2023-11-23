@@ -1,5 +1,6 @@
 package com.his.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.his.command.LoginCommand;
 import com.his.dtos.DigDto;
+import com.his.dtos.PtDto;
 import com.his.service.AdminService;
 import com.his.service.DigService;
+import com.his.service.PtService;
 import com.his.util.Util;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,6 +31,9 @@ public class HomeController {
 	
 	@Autowired
 	private DigService digService;
+	
+	@Autowired
+	private PtService ptService;
 	
 	@GetMapping(value="/")
 	public String digCal(Model model, HttpServletRequest request) {
@@ -46,7 +52,10 @@ public class HomeController {
 		
 		List<DigDto> dlist=digService.digViewList(yyyyMM);
 		
+		List<PtDto> plist =ptService.getPtList();
+	
 		model.addAttribute("dlist",dlist);
+		model.addAttribute("plist",plist);
 		
 		Map<String, Integer> map=digService.makeDigCalendar(request);
 		model.addAttribute("digMap",map);

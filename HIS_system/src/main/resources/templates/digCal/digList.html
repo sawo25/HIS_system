@@ -30,17 +30,19 @@
 		<br><br>
 		<h1 style="text-align:center;">일정목록보기</h1> 
 		<br><br>
-		<form th:action="@{/digCal/calMulDel}" method="post"
+		<form th:action="@{/digCal/digMulDel}" method="post"
 			  th:object="${delDigCommand}" onsubmit="return isCheck()">
-			<table class="table">
+			<table class="table table-hover">
 				<col width="50px" />
 				<col width="200px" />
-				<col width="300px" />
 				<col width="200px" />
+				<col width="200px" />
+				<col width="100px" />
 				<tr>
 					<th><input type="checkbox" name="all" onclick="allSel(this.checked)"/></th>
 					<th>진료일</th>
 					<th>환자 번호</th>
+					<th>환자 이름</th>
 					<th>진료 의사 번호</th>
 					<th>병명</th>
 				</tr>
@@ -56,16 +58,17 @@
 						<td>
 							<a th:href="@{/digCal/digDetail(dig_seq=${dto.dig_seq})}"  th:text="${dto.pt_seq}"></a>
 						</td>
+						<td th:text="${pname}" ></td>
 						<td th:text="${dto.medi_seq}" ></td>
 						<td th:text="${dto.diseas}" ></td>
 					</tr>
 				</th:block>
 				<tr>
 					<td colspan="4">
-						<button type="submit" title="기록 삭제" class="btn btn-default" >
+						<button type="submit" title="기록 삭제" class="btn btn-default btn-lg" >
 						  <span class="glyphicon glyphicon-trash" ></span>
 						</button>
-						<button type="button" title="진료 일정[달력]" class="btn btn-default"
+						<button type="button" title="진료 일정[달력]" class="btn btn-default btn-lg"
 								th:onclick="|location.href='@{/(year=${session.ymdMap.year},month=${session.ymdMap.month})}'|" >                        
 						  <span class="glyphicon glyphicon-calendar" ></span>
 						</button> 

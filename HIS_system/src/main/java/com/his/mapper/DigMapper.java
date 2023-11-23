@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.his.dtos.DigDto;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Mapper
@@ -21,5 +22,7 @@ public interface DigMapper {
 		public DigDto getDig(int dig_seq);
 
 		public boolean digUpdate(DigDto dto);
+
+		public boolean digMulDel(Map<String, String[]>map);
 
 }

@@ -25,4 +25,6 @@ public interface PtMapper {
 	public MediDto mediLogin(int medi_seq);
 
 	public boolean diseasUpdate(String diseas, int pt_seq);
+	
+	public String ptName(int pt_seq);
 }
