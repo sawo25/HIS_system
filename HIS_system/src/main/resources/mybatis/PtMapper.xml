@@ -10,7 +10,7 @@
 	
 	<insert id="addPt" parameterType="ptDto">
 		INSERT INTO PT
-		VALUES (NULL,#{medi_seq},#{name},#{dept},#{sex},#{height},#{weight},#{diseas})
+		VALUES (NULL,#{medi_seq},#{name},#{dept},#{sex},#{height},#{weight},#{diseas},'N')
 	</insert>
 	
 	<select id="getPt" parameterType="Integer" resultType="ptDto">
@@ -46,6 +46,14 @@
 		SELECT NAME
 		FROM PT
 		WHERE PT_SEQ=#{pt_seq}
+	</select>
+	
+	<select id="patientDig" parameterType="Integer" resultType="digDto">
+		SELECT A.DIG_SEQ, A.PT_SEQ, A.MEDI_SEQ, A.DISEAS, A.CONTENT, A.DIG_DATE
+		FROM DIG A INNER JOIN PT B
+		ON A.PT_SEQ=B.PT_SEQ
+		WHERE B.PT_SEQ=#{pt_seq}
+		ORDER BY DIG_SEQ DESC
 	</select>
 </mapper>
 

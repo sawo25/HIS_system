@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.his.command.DiseasCommand;
 import com.his.dtos.AdminDto;
+import com.his.dtos.DigDto;
 import com.his.dtos.MediDto;
 import com.his.dtos.PtDto;
 
@@ -27,4 +28,6 @@ public interface PtMapper {
 	public boolean diseasUpdate(String diseas, int pt_seq);
 	
 	public String ptName(int pt_seq);
+	
+	public List<DigDto> patientDig(int pt_seq);
 }

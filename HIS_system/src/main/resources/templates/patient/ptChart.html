@@ -14,7 +14,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h1 style="text-align:center;">환자 차트</h1>
+<h1 style="text-align:center; font-weight: bold;">환자 차트</h1>
 <form action="/patient/ptInsert" method="get" th:object="${ptInsertCommand}">
 		<th:block th:unless="${session.dto==null}">
 			<p>

@@ -82,6 +82,7 @@
 	  			<button type="submit" class="btn btn-default btn-medium">수정</button>
 	  			<button type="button" class="btn btn-default btn-medium" th:onclick="|location.href='@{/patient/ptDel(pt_seq=${dto.pt_seq})}'|">삭제</button>	  			
 	  			<button type="button" class="btn btn-default btn-medium" th:onclick="|location.href='@{/patient/ptChart}'|">목록</button>
+	  			<button style="float:right" type="button" class="btn btn-default btn-medium" th:onclick="|location.href='@{/patient/patientDig(pt_seq=${dto.pt_seq})}'|">진료 기록</button>
 	  		</td>
 	  	</tr>
 	  </table>

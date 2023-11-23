@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.his.mapper.DigMapper">
+
 	<select id="digViewList" parameterType="String" resultType="digDto">
 		SELECT rn, dig_seq, pt_seq, medi_seq, diseas, content, dig_date
 		FROM (SELECT ROW_NUMBER() over
@@ -42,6 +43,8 @@
 			#{dig_seq}
 		</foreach>
 	</delete>
+	
+	
 </mapper>
 
 

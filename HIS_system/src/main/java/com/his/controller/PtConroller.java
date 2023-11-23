@@ -17,6 +17,7 @@ import com.his.command.MediLoginCommand;
 import com.his.command.MediUpdateCommand;
 import com.his.command.PtInsertCommand;
 import com.his.command.PtUpdateCommand;
+import com.his.dtos.DigDto;
 import com.his.dtos.MediDto;
 import com.his.dtos.PtDto;
 import com.his.service.AdminService;
@@ -142,6 +143,15 @@ public class PtConroller {
 		String path=ptService.mediLogin(mediLoginCommand, request, model);
 		
 		return path;
+	}
+	
+	@GetMapping(value="/patientDig")
+	public String patientDig(int pt_seq, Model model) {
+		System.out.println("환자 진료 기록 목록");
+
+		List<DigDto> list=ptService.patientDig(pt_seq);
+		model.addAttribute("list",list);
+		return "patient/patientDig";
 	}
 	
 }

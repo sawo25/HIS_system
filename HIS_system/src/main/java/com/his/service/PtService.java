@@ -12,6 +12,7 @@ import com.his.command.MediLoginCommand;
 import com.his.command.PtInsertCommand;
 import com.his.command.PtUpdateCommand;
 import com.his.dtos.AdminDto;
+import com.his.dtos.DigDto;
 import com.his.dtos.MediDto;
 import com.his.dtos.PtDto;
 import com.his.mapper.AdminMapper;
@@ -65,6 +66,7 @@ public class PtService {
 	
 	public void ptDel(int pt_seq) {
 		ptMapper.ptDel(pt_seq);
+		
 	}
 	
 	public String mediLogin(MediLoginCommand mediLoginCommand
@@ -97,6 +99,9 @@ public class PtService {
 		return ptMapper.ptName(pt_seq);
 	}
 	
+	public List<DigDto> patientDig(int pt_seq){
+		return ptMapper.patientDig(pt_seq);
+	}
 	
 	
 }
