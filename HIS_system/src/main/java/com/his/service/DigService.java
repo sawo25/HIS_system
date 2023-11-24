@@ -110,4 +110,10 @@ public class DigService {
 	public boolean digMulDel(Map<String, String[]> map) {
 		return digMapper.digMulDel(map);
 	}
+	
+	public List<DigDto> getPtDig(int pt_seq){
+		return digMapper.getPtDig(pt_seq);
+	}
+	
+	
 }

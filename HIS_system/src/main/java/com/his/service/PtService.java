@@ -16,6 +16,7 @@ import com.his.dtos.DigDto;
 import com.his.dtos.MediDto;
 import com.his.dtos.PtDto;
 import com.his.mapper.AdminMapper;
+import com.his.mapper.DigMapper;
 import com.his.mapper.PtMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,8 +29,8 @@ public class PtService {
 	@Autowired
 	private AdminMapper adminMapper;
 	@Autowired
-	private PasswordEncoder passwordEncoder;
-
+	private DigMapper digMapper;
+	
 	public List<PtDto> getPtList(){
 		return ptMapper.getPtList();
 	}
@@ -99,9 +100,7 @@ public class PtService {
 		return ptMapper.ptName(pt_seq);
 	}
 	
-	public List<DigDto> patientDig(int pt_seq){
-		return ptMapper.patientDig(pt_seq);
-	}
+	
 	
 	
 }

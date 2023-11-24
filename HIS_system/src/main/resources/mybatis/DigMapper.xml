@@ -44,6 +44,11 @@
 		</foreach>
 	</delete>
 	
+	<select id="getPtDig" parameterType="int" resultType="digDto">
+		SELECT DIG_SEQ, PT_SEQ, MEDI_SEQ, DISEAS, CONTENT, DIG_DATE
+		FROM DIG
+		WHERE PT_SEQ=#{pt_seq}
+	</select>
 	
 </mapper>
 

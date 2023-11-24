@@ -28,15 +28,18 @@
 <div layout:fragment="content">
 	<div id="container">
 		<br><br>
-		<h1 style="text-align:center;">진료 목록</h1> 
+		<span style="font-size: large;" th:text="${pname}+ 환자"></span>
+		<h1 style="text-align:center;">진료 기록</h1> 
 		<br><br>
-		<form onsubmit="return isCheck()">
+		<form th:action="@{/patient/ptDigDel}" method="post" 
+				th:object="${delDigCommand}" onsubmit="return isCheck()">
 			<table class="table table-hover">
 				<col width="50px" />
 				<col width="200px" />
-				<col width="200px" />
-				<col width="200px" />
 				<col width="100px" />
+				<col width="100px" />
+				<col width="200px" />
+				<col width="300px" />
 				<tr>
 					<th><input type="checkbox" name="all" onclick="allSel(this.checked)"/></th>
 					<th>진료일</th>
@@ -54,7 +57,7 @@
 					<tr th:each="dto:${list}">
 						<td><input type="checkbox" name="dig_seq" th:value="${dto.dig_seq}"/></td>
 						<td th:text="${@util.toDates(dto.dig_date)}" ></td>
-						<td><a th:text="${dto.pt_seq}"></a></td>
+						<td th:name="pt_seq" th:value="${dto.pt_seq}"></td>
 						<td th:text="${dto.medi_seq}" ></td>
 						<td th:text="${dto.diseas}" ></td>
 						<td th:text="${dto.content}" ></td>
@@ -65,8 +68,6 @@
 						<button type="submit" title="기록 삭제" class="btn btn-default btn-lg" >
 						  <span class="glyphicon glyphicon-trash" ></span>
 						</button>
-						<span class="errorField" th:if="${#fields.hasErrors('dig_seq')}"
-												 th:errors="*{dig_seq}"></span>
 					</td>
 				</tr>
 			</table>

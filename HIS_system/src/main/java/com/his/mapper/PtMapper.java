@@ -29,5 +29,4 @@ public interface PtMapper {
 	
 	public String ptName(int pt_seq);
 	
-	public List<DigDto> patientDig(int pt_seq);
 }

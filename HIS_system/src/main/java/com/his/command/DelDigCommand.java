@@ -5,7 +5,7 @@ import java.util.Arrays;
 import jakarta.validation.constraints.NotEmpty;
 
 public class DelDigCommand {
-	
+
 	@NotEmpty(message="삭제하려면 최소 하나 이상 체크하세요")
 	private String[] dig_seq;
 

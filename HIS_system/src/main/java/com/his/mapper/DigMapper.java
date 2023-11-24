@@ -24,5 +24,7 @@ public interface DigMapper {
 		public boolean digUpdate(DigDto dto);
 
 		public boolean digMulDel(Map<String, String[]>map);
+		
+		public List<DigDto> getPtDig(int pt_seq);
 
 }

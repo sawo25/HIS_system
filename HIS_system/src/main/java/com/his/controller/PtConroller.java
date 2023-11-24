@@ -1,7 +1,11 @@
 package com.his.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,30 +14,41 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.his.command.DelDigCommand;
 import com.his.command.LoginCommand;
 import com.his.command.MediInsertCommand;
 import com.his.command.MediLoginCommand;
 import com.his.command.MediUpdateCommand;
+import com.his.command.PtDelCommand;
 import com.his.command.PtInsertCommand;
 import com.his.command.PtUpdateCommand;
 import com.his.dtos.DigDto;
 import com.his.dtos.MediDto;
 import com.his.dtos.PtDto;
 import com.his.service.AdminService;
+import com.his.service.DigService;
 import com.his.service.PtService;
+import com.his.util.Util;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value="/patient")
 public class PtConroller {
 
+	Logger logger=LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private PtService ptService;
 
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private DigService digService;
 	
 	@GetMapping(value="/ptChart")
 	public String getPtList(Model model) {
@@ -145,13 +160,47 @@ public class PtConroller {
 		return path;
 	}
 	
-	@GetMapping(value="/patientDig")
-	public String patientDig(int pt_seq, Model model) {
-		System.out.println("환자 진료 기록 목록");
+	@GetMapping(value = "/getPtDig")
+	public String getPtDig(int pt_seq, Model model, HttpServletRequest request) {
+	
+		logger.info("해당환자의 진료기록");
+		
+		HttpSession session=request.getSession();
 
-		List<DigDto> list=ptService.patientDig(pt_seq);
-		model.addAttribute("list",list);
-		return "patient/patientDig";
+		model.addAttribute("delDigCommand",new DelDigCommand());
+		session.setAttribute("pt_seq",pt_seq);
+
+		List<DigDto> list= digService.getPtDig(pt_seq);
+		model.addAttribute("list", list);
+		
+		String pName=ptService.ptName(pt_seq);
+		model.addAttribute("pname",pName);
+		
+		return "patient/getPtDig";
+	}
+	
+	@PostMapping(value = "/ptDigDel")
+	public String ptDigDel(@Validated DelDigCommand delDigCommand,
+							BindingResult result,
+							HttpServletRequest request,
+							Model model) {
+		
+		HttpSession session=request.getSession();
+
+		int pt_seq=(int)session.getAttribute("pt_seq");
+		
+		if(result.hasErrors()) {
+			System.out.println("최소 하나 이상 체크하기");
+			
+			return "redirect:/patient/getPtDig?pt_seq="+pt_seq;
+		}
+		
+		
+		Map<String,String[]>map=new HashMap<>();
+		map.put("dig_seqs", delDigCommand.getDig_seq());
+		digService.digMulDel(map);
+		
+		return "redirect:/patient/getPtDig?pt_seq="+pt_seq;
 	}
 	
 }
