@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+</script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<div layout:fragment="content">
+<h1 style="text-align:center;">환자 등록</h1>
+<form action="/patient/ptInsert" method="post"
+	  enctype="multipart/form-data" th:object="${ptInsertCommand}">
+	<table style="width: 800px; margin-left:auto; 
+    margin-right:auto;" class="table">
+		<tr>
+			<th>담당 의료진 번호</th>
+			<td>
+				<select name="medi_seq">    
+					<option value="">-- 번호 선택 --</option>
+        			<option th:each="dto:${mlist}"th:if="${dto.job=='DR'}" th:value="${dto.medi_seq}" 
+               				th:utext="${dto.medi_seq}">
+        			</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>이름</th>
+			<td>
+				<input type="text" name="name" th:field="*{name}" 
+												class="form-control"/>
+				<span th:if="${#fields.hasErrors('name')}" 
+					  th:errors="*{name}"></span>
+			</td>
+		</tr>
+		<tr>
+			<th>부서</th>
+			<td>
+				<select name="dept">    
+					<option value="">-- 부서 선택 --</option>
+        			<option th:each="dto:${mlist}"th:if="${dto.job=='DR'}" th:value="${dto.dept}" 
+               				th:utext="${dto.dept}">
+        			</option>
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>성별</th>
+			<td>
+				<select name="sex">    
+					<option>--성별 선택--</option>    
+					<option value="F">F</option>    
+					<option value="M">M</option>    
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>신장</th>
+			<td>
+				<input type="text" name="height" th:field="*{height}" 
+												class="form-control"/>
+				<span th:if="${#fields.hasErrors('height')}" 
+					  th:errors="*{height}"></span>
+			</td>
+		</tr>
+		<tr>
+			<th>몸무게</th>
+			<td>
+				<input type="text" name="weight" th:field="*{weight}" 
+												class="form-control"/>
+				<span th:if="${#fields.hasErrors('weight')}" 
+					  th:errors="*{weight}"></span>
+			</td>
+		</tr>
+		<tr>
+			<th>병명</th>
+			<td>
+				<input type="text" name="diseas" th:field="*{diseas}" 
+												class="form-control"/>
+				<span th:if="${#fields.hasErrors('diseas')}" 
+					  th:errors="*{diseas}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<button type="submit" class="btn btn-default btn-medium">등록</button>
+				<button type="button" class="btn btn-default btn-medium"
+				 th:onclick="|location.href='@{/patient/ptChart}'|">환자 목록</button>
+			</td>
+		</tr>
+	</table>
+</form>
+</div>
+</body>
+</html>

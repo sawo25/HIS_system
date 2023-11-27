@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.his.mapper.PtMapper">
+	<select id="getPtList" resultType="ptDto">
+		SELECT PT_SEQ, MEDI_SEQ, NAME, DEPT, SEX, HEIGHT, WEIGHT, DISEAS, ADM_FLAG
+		FROM PT
+		ORDER BY PT_SEQ ASC
+	</select>
+	
+	<insert id="addPt" parameterType="ptDto">
+		INSERT INTO PT
+		VALUES (NULL,#{medi_seq},#{name},#{dept},#{sex},#{height},#{weight},#{diseas},'N')
+	</insert>
+	
+	<select id="getPt" parameterType="Integer" resultType="ptDto">
+		SELECT *
+		FROM PT
+		WHERE PT_SEQ=#{pt_seq}
+	</select>
+	
+	<update id="ptUpdate" parameterType="ptDto">
+		UPDATE PT
+		SET MEDI_SEQ=#{medi_seq}, DEPT=#{dept}, HEIGHT=#{height}, WEIGHT=#{weight}, DISEAS=#{diseas}, ADM_FLAG=#{adm_flag}
+		WHERE PT_SEQ=#{pt_seq}
+	</update>
+	
+	<delete id="ptDel" parameterType="Integer">
+		DELETE FROM PT
+		WHERE PT_SEQ=#{pt_seq}
+	</delete>
+	
+	<select id="mediLogin" parameterType="Integer" resultType="mediDto">
+		SELECT MEDI_SEQ, NAME, JOB
+		FROM MEDI
+		WHERE MEDI_SEQ = #{medi_seq}
+	</select>
+	
+	<update id="diseasUpdate" parameterType="Map">
+		UPDATE PT
+		SET DISEAS=#{diseas}
+		WHERE PT_SEQ=#{pt_seq}
+	</update>
+	
+	<select id="ptName" parameterType="Integer" resultType="String">
+		SELECT NAME
+		FROM PT
+		WHERE PT_SEQ=#{pt_seq}
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
