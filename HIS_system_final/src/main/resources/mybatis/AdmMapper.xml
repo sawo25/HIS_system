@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.his.mapper.AdmMapper">
+	<select id="admList" parameterType="Integer">
+		SELECT *
+		FROM ADM
+		WHERE ADM_PT=#{adm_pt}
+		ORDER BY ADM_DATE DESC
+	</select>
+	<insert id="admAdd" parameterType="admDto">
+		INSERT INTO ADM
+		VALUES (NULL, #{adm_pt}, #{adm_rn}, #{adm_date}, #{adm_content}, #{adm_fill})
+	</insert>
+	<select id="getAdm" parameterType="Integer" resultType="admDto">
+		SELECT *
+		FROM ADM
+		WHERE ADM_SEQ=#{adm_seq}
+	</select>
+	<update id="admUpdate" parameterType="admDto">
+		UPDATE ADM
+		SET ADM_CONTENT=#{adm_content}, ADM_FILL=#{adm_fill}
+		WHERE ADM_SEQ=#{adm_seq}
+	</update>
+	<delete id="admDel" parameterType="Integer">
+		DELETE FROM ADM
+		WHERE ADM_SEQ=#{adm_seq}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

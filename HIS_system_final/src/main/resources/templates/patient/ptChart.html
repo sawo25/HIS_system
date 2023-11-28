@@ -91,7 +91,7 @@
 				<td th:text="${dto.pt_seq}"></td>
 				<td th:text="${dto.medi_seq}"></td>
 				<td>
-					<a th:href="@{/patient/ptDetail(pt_seq=${dto.pt_seq})}"
+					<a th:href="@{/adm/admList(adm_pt=${dto.pt_seq})}"
 					   th:text="${dto.name}"></a>
 				</td>
 				<td th:text="${dto.dept}"></td>

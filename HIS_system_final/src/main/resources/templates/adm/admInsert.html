@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+</script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<div layout:fragment="content">
+<h1 style="text-align:center; font-weight: bold;">처치 기록 추가</h1>
+<form th:action="@{/adm/admInsert}" method="post" th:object="${admInsertCommand}">
+		<table class="table">
+			<input type="hidden" name="adm_pt" th:value="${pt_seq}"/>
+			<input type="hidden" name="adm_rn" th:value="${session.dto.medi_seq}"/>
+			<tr>
+				<th>처치 환자 번호</th>
+				<td th:text="${pt_seq}"></td>
+			</tr>
+			<tr>>
+				<th>처치 간호사 번호</th>
+				<td th:text="${session.dto.medi_seq}"></td>
+			</tr>
+			<tr>
+				<th>처치일</th>
+				<td>
+					<select name="year">
+						<th:block th:each="i:${#numbers.sequence(2022,2023)}">
+							<th:block th:if="${admInsertCommand.year==i}">
+								<option th:value="${i}" th:text="${i}" selected="selected"></option>
+							</th:block>
+							<th:block th:unless="${admInsertCommand.year==i}">
+								<option th:value="${i}" th:text="${i}"></option>
+							</th:block>
+						</th:block>
+					</select> 년
+					<select name="month">
+						<th:block th:each="i:${#numbers.sequence(1,12)}">
+							<th:block th:if="${admInsertCommand.month==i}">
+								<option th:value="${i}" th:text="${i}" selected="selected"></option>
+							</th:block>
+							<th:block th:unless="${admInsertCommand.month==i}">
+								<option th:value="${i}" th:text="${i}"></option>
+							</th:block>
+						</th:block>
+					</select> 월
+					<select name="date">
+						<th:block th:each="i:${#numbers.sequence(1,31)}">
+							<th:block th:if="${admInsertCommand.date==i}">
+								<option th:value="${i}" th:text="${i}" selected="selected"></option>
+							</th:block>
+							<th:block th:unless="${admInsertCommand.date==i}">
+								<option th:value="${i}" th:text="${i}"></option>
+							</th:block>
+						</th:block>
+					</select> 일
+					<select name="hour">
+						<th:block th:each="i:${#numbers.sequence(0,23)}">
+								<option th:value="${i}" th:text="${i}"></option>
+						</th:block>
+					</select> 시
+					<select name="min">
+						<th:block th:each="i:${#numbers.sequence(0,59)}">
+								<option th:value="${i}" th:text="${i}"></option>
+						</th:block>
+					</select> 분
+				</td>
+			</tr>
+			<tr>
+				<th>처치 내용</th>
+				<td>
+					<textarea rows="10" cols="60" name="adm_content" th:field="*{adm_content}"></textarea>
+					<span th:if="${#fields.hasErrors('adm_content')}" 
+					  th:errors="*{adm_content}"></span>
+				</td>
+			</tr>
+			<tr>
+				<th>투약 내용</th>
+				<td>
+					<textarea rows="5" cols="60" name="adm_fill" th:field="*{adm_fill}"></textarea>
+					<span th:if="${#fields.hasErrors('adm_fill')}" th:errors="*{adm_fill}"></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit"  class="btn btn-primary" value="기록 추가"/>
+					<input type="button"  class="btn btn-primary" value="기록 목록"
+								th:onclick="|location.href='@{/adm/admList(adm_pt=${pt_seq})}'|"/>
+				</td>
+			</tr>
+			
+		</table>
+	</form>
+</div>
+</body>
+</html>

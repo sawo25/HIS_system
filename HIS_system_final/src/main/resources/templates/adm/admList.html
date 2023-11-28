@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+</script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<div layout:fragment="content">
+<h1 style="text-align:center; font-weight: bold;">입원 환자 처치 기록</h1>
+<form action="/adm/admInsertForm" method="get" th:object="${admInsertCommand}">
+	   <table class="table table-hover">
+		<col width="50px" />
+		<col width="100px" />
+		<col width="100px" />
+		<col width="150px" />
+	   	<tr>
+				<th>ADM_SEQ</th>
+				<th>환자 이름</th>
+				<th>처치 간호사</th>
+				<th>처치일</th>
+	   	<tr>
+		
+		<th:block th:unless="${#lists.isEmpty(list)}">
+			<tr th:each="dto:${list}">
+				<td th:text="${dto.adm_seq}"></td>
+				<td><a th:href="@{/adm/admDetail(adm_seq=${dto.adm_seq})}"
+					   th:text="${pname}"></a></td>
+				<td th:text="${dto.adm_rn}"></td>
+				<td th:text="${@util.toDates(dto.adm_date)}"></td>
+			</tr>
+		</th:block>
+   </table>
+   <button type="submit" class="btn btn-default btn-medium">기록 추가</button>
+</form>
+
+</div>
+</body>
+</html>
+

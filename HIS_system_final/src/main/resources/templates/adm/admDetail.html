@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function updateEx(){
+		if(confirm("수정하시겠습니까?")){
+			return true;
+		}
+		return false;
+	}
+</script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<div layout:fragment="content">
+<h1>환자 상세</h1>
+<form action="/adm/admUpdate" method="post" onsubmit="return updateEx()" th:object="${admUpdateCommand}">
+	  <input type="hidden" name="adm_seq" th:value="${dto.adm_seq}"/>
+	  <table class="table">
+	  	<tr>
+	  		<th>처치 환자 번호</th>
+	  		<td th:text="${dto.adm_pt}"></td>
+	  	</tr>
+	  	<tr>
+	  		<th>처치 환자 이름</th>
+	  		<td th:text="${pname}"></td>
+	  	</tr>
+	  	<tr>
+	  		<th>처치 간호사 번호</th>
+	  		<td th:text="${dto.adm_rn}"></td>
+	  	</tr>
+	  	<tr>
+	  		<th>처치일</th>
+	  		<td th:text="${@util.toDates(dto.adm_date)}"></td>
+	  	</tr>
+	  	<tr>
+			<th>처치 내용</th>
+				<td>
+					<textarea rows="10" cols="60" name="adm_content" th:field="${dto.adm_content}"></textarea>
+					<span th:if="${#fields.hasErrors('adm_content')}" 
+					  th:errors="*{adm_content}"></span>
+				</td>
+		</tr>
+		<tr>
+			<th>투약 내용</th>
+				<td>
+					<textarea rows="5" cols="60" name="adm_fill" th:field="${dto.adm_fill}"></textarea>
+					<span th:if="${#fields.hasErrors('adm_fill')}" th:errors="*{adm_fill}"></span>
+				</td>
+		</tr>
+	  	<tr>
+	  		<td colspan="2">
+				  <span th:if="${session.dto.medi_seq}==${dto.adm_rn}">
+	  				<button type="submit" class="btn btn-default btn-medium">수정</button>
+	  				<button type="button" class="btn btn-default btn-medium" th:onclick="|location.href='@{/adm/admDel(adm_seq=${dto.adm_seq})}'|">삭제</button>	  								  
+				  </span>
+	  			<button type="button" class="btn btn-default btn-medium" th:onclick="|location.href='@{/adm/admList(adm_pt=${dto.adm_pt})}'|">목록</button>
+	  		</td>
+	  	</tr>
+	  </table>
+</form>
+</div>
+</body>
+</html>
+
