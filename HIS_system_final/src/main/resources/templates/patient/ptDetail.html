@@ -66,7 +66,7 @@
 	  	<tr>
 	  		<th>키</th>
 	  		<td>
-				<input type="text" name="height" th:value="${dto.height}" class="form-control"/>
+				<input style="width: 300px;" type="text" name="height" th:value="${dto.height}" class="form-control"/>
 	  			<span th:if="${#fields.hasErrors('height')}" 
 	  				  th:errors="*{height}"></span>
 			</td>
@@ -74,7 +74,7 @@
 	  	<tr>
 	  		<th>몸무게</th>
 	  		<td>
-				<input type="text" name="weight" th:value="${dto.weight}" class="form-control"/>
+				<input style="width: 300px;" type="text" name="weight" th:value="${dto.weight}" class="form-control"/>
 	  			<span th:if="${#fields.hasErrors('weight')}" 
 	  				  th:errors="*{weight}"></span>
 			</td>
@@ -82,7 +82,7 @@
 	  	<tr>
 	  		<th>병명</th>
 	  		<td>
-				<input type="text" name="diseas" th:value="${dto.diseas}" class="form-control"/>
+				<input style="width: 700px;" type="text" name="diseas" th:value="${dto.diseas}" class="form-control"/>
 	  			<span th:if="${#fields.hasErrors('diseas')}" 
 	  				  th:errors="*{diseas}"></span>
 			</td>

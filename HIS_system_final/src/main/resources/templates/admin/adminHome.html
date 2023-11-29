@@ -13,11 +13,11 @@
 </style>
 </head>
 <body>
-<div layout:fragment="content">
+<div style="text-align: center;" layout:fragment="content">
 <h1 style="font-weight: bold; text-align:center;">관리자 페이지</h1>
 <th:block th:if="${session.mdto==null}">
 	<p>
-		<a href="/admin/adminLogin">관리자 로그인</a>
+		<a style="background-color: lightsteelblue; color: black; padding: 15px 25px; display: inline-block;" href="/admin/adminLogin">관리자 로그인</a>
 	</p>
 </th:block>
 <th:block th:unless="${session.mdto==null}">
@@ -25,7 +25,7 @@
 		<span th:text="${session.mdto.id}" >로그인 상태</span>
 	</p>
 </th:block>
-	<p><a href="/admin/mediList">의료진 목록</a></p>
+	<p><a style="background-color: lightsteelblue; color: black; padding: 15px 25px; display: inline-block;" href="/admin/mediList">의료진 목록</a></p>
 </div>
 </body>
 </html>

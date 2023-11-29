@@ -93,9 +93,11 @@
 						<a class="d" th:text="${i}"  th:style="'color:'+${@util.fontColor(i,digMap.dayOfWeek)}"
 							th:href="@{/digCal/digList(year=${digMap.year},month=${digMap.month},date=${i})}">
 						</a>
+						<span>
 						<a th:href="@{/digCal/insertDigForm(year=${digMap.year},month=${digMap.month},date=${i})}">
-							<img style="padding: 2px;" class="pen" th:src="@{/img/chart.png}" />
-						</a><br>
+							<img  style="padding: 2px;" class="pen" th:src="@{/img/chart.png}" />
+						</a>
+						</span><br>
 						[(${@util.getCalViewList(i,dlist,plist)})]
 					</div>
 				</th:block>

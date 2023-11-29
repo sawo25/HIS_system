@@ -57,11 +57,13 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<button type="submit" class="btn btn-default btn-medium">기록 수정</button>
-						<button type="button" title="진료기록 삭제" class="btn btn-default btn-medium"
-								th:onclick="|location.href='@{/digCal/digMulDel(dig_seq=${updateDigCommand.dig_seq})}'|" >
-						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>
+						<span th:if="${session.dto.job=='DR'}">
+							<button type="submit" class="btn btn-default btn-medium">기록 수정</button>
+							<button type="button" title="진료기록 삭제" class="btn btn-default btn-medium"
+									th:onclick="|location.href='@{/digCal/digMulDel(dig_seq=${updateDigCommand.dig_seq})}'|" >
+							  <span class="glyphicon glyphicon-trash" ></span>
+							</button>				
+						</span>
 						<button type="button" title="진료일정 목록" class="btn btn-default btn-medium"
 								th:onclick="|location.href='@{/digCal/digList}'|" >
 						  <span class="glyphicon glyphicon-list" ></span>

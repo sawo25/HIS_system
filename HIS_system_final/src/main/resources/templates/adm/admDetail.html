@@ -19,7 +19,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h1>환자 상세</h1>
+<h1>처치 기록 상세</h1>
 <form action="/adm/admUpdate" method="post" onsubmit="return updateEx()" th:object="${admUpdateCommand}">
 	  <input type="hidden" name="adm_seq" th:value="${dto.adm_seq}"/>
 	  <table class="table">

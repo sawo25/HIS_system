@@ -52,14 +52,15 @@
 						<td colspan="4" style="text-align: center">작성된 일정이 없습니다.</td>
 					</tr>
 				</th:block>
-				<th:block th:unless="${#lists.isEmpty(list)}">
-					<tr th:each="dto:${list}">
+				<th:block  th:unless="${#lists.isEmpty(list)}">
+					<tr th:each="dto:${list}" >
 						<td><input type="checkbox" name="dig_seq" th:value="${dto.dig_seq}"/></td>
 						<td th:text="${@util.toDates(dto.dig_date)}" ></td>
 						<td>
 							<a th:href="@{/digCal/digDetail(dig_seq=${dto.dig_seq})}"  th:text="${dto.pt_seq}"></a>
 						</td>
-						<td th:text="${pname}" ></td>
+						<td th:text="${pname[0]}" ></td>								
+						</span>
 						<td th:text="${dto.medi_seq}" ></td>
 						<td th:text="${dto.diseas}" ></td>
 					</tr>

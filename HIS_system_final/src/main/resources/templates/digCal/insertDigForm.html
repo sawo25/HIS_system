@@ -26,14 +26,7 @@
 			</tr>
 			<tr>
 				<th>진료 의사 번호</th>
-				<td>
-					<select name="medi_seq">    
-						<option value="">-- 번호 선택 --</option>
-        				<option th:each="mdto:${mlist}" th:if="${mdto.job=='DR'}" th:value="${mdto.medi_seq}" 
-               					th:utext="${mdto.medi_seq}">
-        				</option>
-					</select>
-				</td>
+				<td th:text="${session.dto.medi_seq}"></td>
 			</tr>
 			<tr>
 				<th>진료일</th>
